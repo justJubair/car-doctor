@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom"
 import logo from "../../assets/logo.svg"
+import { AiOutlineShopping, AiOutlineSearch } from "react-icons/ai";
 const Navbar = () => {
   const navLinks = <>
   <li><NavLink to="/">Home</NavLink></li>
@@ -30,11 +31,14 @@ const Navbar = () => {
        }
       </ul>
     </div>
-    <div className="navbar-end">
-      <a className="btn">Button</a>
+    <div className="space-x-6 navbar-end">
+      <AiOutlineShopping className="text-gray-500" size={25}/>
+      <AiOutlineSearch className="text-gray-500" size={25}/>
+      <a className="btn btn-outline text-[#FF3811]">Appointment</a>
     </div>
   </div>
   )
 }
 
 export default Navbar
+
