@@ -30,7 +30,7 @@ const AboutUs = () => {
             humour, or randomised words which don't look even slightly
             believable.
           </p>
-          <button className="btn bg-[#FF3811] text-white">Get Started</button>
+          <button className="btn bg-[#FF3811] text-white hover:text-black">Get Started</button>
         </div>
       </div>
     </div>
