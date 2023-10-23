@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { AiOutlineShopping, AiOutlineSearch } from "react-icons/ai";
+import { useEffect, useState } from "react";
 const Navbar = () => {
   const navLinks = (
     <>
@@ -21,9 +22,52 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const themes = [
+    'light',
+    'dark',
+    'cupcake',
+    'bumblebee',
+    'emerald',
+    'corporate',
+    'synthwave',
+    'retro',
+    'cyberpunk',
+    'valentine',
+    'halloween',
+    'garden',
+    'forest',
+    'aqua',
+    'lofi',
+    'pastel',
+    'fantasy',
+    'wireframe',
+    'black',
+    'luxury',
+    'dracula',
+    'cmyk',
+    'autumn',
+    'business',
+    'acid',
+    'lemonade',
+    'night',
+    'coffee',
+    'winter',
+  ]
+  // use theme from local storage if availabe or set light theme
+  const currentTheme = localStorage.getItem("theme")
+  const [theme, setTheme] = useState(currentTheme || "light")
+
+  // set theme state in localstorage on mount and also update localstorage on state change
+  useEffect(()=>{
+    localStorage.setItem("theme", theme)
+    const localTheme = localStorage.getItem("theme")
+    // add custom data-theme attribute to html tag required to update theme using DaisyUI
+    document.querySelector("html").setAttribute("data-theme", localTheme)
+  },[theme])
   return (
     <div className="navbar bg-base-100">
-      <div className="navbar-start">
+      <div className="justify-start w-1/4 mx-auto">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -53,10 +97,22 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-4">{navLinks}</ul>
       </div>
-      <div className="space-x-6 navbar-end">
+      <div className="space-x-6 justify-end">
         <AiOutlineShopping className="text-gray-500" size={25} />
         <AiOutlineSearch className="text-gray-500" size={25} />
         <a className="btn btn-outline text-[#FF3811]">Appointment</a>
+
+        <div>
+          <select onChange={e=> setTheme(e.target.value)} className="select select-warning w-full max-w-xs">
+            {
+              themes.map(theme=> <option key={theme} value={theme}>
+                {theme[0].toUpperCase() + theme.slice(1)}
+                {/* {theme} */}
+              </option>)
+            }
+           
+          </select>
+        </div>
       </div>
     </div>
   );
