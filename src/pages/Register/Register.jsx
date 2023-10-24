@@ -3,6 +3,7 @@ import loginImg from "../../assets/images/login/login.svg";
 import useAuth from "../../hooks/useAuth";
 import auth from "../../firebase/firebase.config";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Register = () => {
     const {createUser} = useAuth()
@@ -14,8 +15,8 @@ const Register = () => {
         const photo = form.get("photo")
         const password = form.get("password")
         createUser(email, password)
-        .then((result) =>{
-            console.log(result.user)
+        .then(() =>{
+          
             toast.success("User created successfully")
             updateProfile(auth.currentUser, {
                 displayName: name, photoURL: photo
@@ -92,11 +93,11 @@ const Register = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn bg-[#FF3811] text-white">Register</button>
+                <button type="submit" className="btn bg-[#FF3811] text-white hover:text-black">Register</button>
               </div>
             <div className="flex items-center">
-                <p>Already have an account?</p>
-                <button className="btn btn-link text-[#FF3811]">Login</button>
+                <p className="font-medium">Already have an account?</p>
+                <Link to="/login" className="btn btn-link text-[#FF3811]">Login</Link>
             </div>
             </form>
           </div>
