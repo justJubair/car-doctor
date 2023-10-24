@@ -66,8 +66,8 @@ const Navbar = () => {
     document.querySelector("html").setAttribute("data-theme", localTheme)
   },[theme])
   return (
-    <div className="navbar bg-base-100">
-      <div className="justify-start w-1/4 mx-auto">
+    <div className="flex items-center justify-between mx-auto w-full bg-base-100">
+      <div className="">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -95,9 +95,9 @@ const Navbar = () => {
         <img className="w-20" src={logo} alt="" />
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-4">{navLinks}</ul>
+        <ul className="menu  menu-horizontal w-full px-1 space-x-4">{navLinks}</ul>
       </div>
-      <div className="space-x-6 justify-end">
+      <div className="space-x-6 flex items-center">
         <AiOutlineShopping className="text-gray-500" size={25} />
         <AiOutlineSearch className="text-gray-500" size={25} />
         <a className="btn btn-outline text-[#FF3811]">Appointment</a>
