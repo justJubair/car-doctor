@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import loginImg from "../../assets/images/login/login.svg";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Navbar from "../../components/Navbar/Navbar";
 const Login = () => {
     const {loginUser} = useAuth()
     const navigate = useNavigate()
@@ -26,6 +27,7 @@ const Login = () => {
   };
   return (
     <div>
+      <Navbar/>
       <div className="hero min-h-screen ">
         <div className="hero-content gap-20 flex-col lg:flex-row">
           <div className="">

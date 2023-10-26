@@ -1,8 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
-import { AiOutlineShopping, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineShopping, AiOutlineLogin } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 const Navbar = () => {
+  // get user and logout function from authprovider observer
+  const {user, logOut} = useAuth()
   const navLinks = (
     <>
       <li>
@@ -23,6 +26,15 @@ const Navbar = () => {
     </>
   );
 
+  const handleLogout = ()=>{
+    logOut()
+    .then(()=>{
+
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  }
   const themes = [
     'light',
     'dark',
@@ -99,7 +111,21 @@ const Navbar = () => {
       </div>
       <div className="space-x-6 flex items-center">
         <AiOutlineShopping className="text-gray-500" size={25} />
-        <AiOutlineSearch className="text-gray-500" size={25} />
+        {
+          user ? <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img src={user.photoURL} />
+            </div>
+          </label>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            
+            <li><a>{user.displayName}</a></li>
+            <li onClick={handleLogout} ><a>Logout</a></li>
+          </ul>
+        </div> : <Link to="/login"> <AiOutlineLogin className="text-gray-500" size={25} /></Link>
+        }
+     
         <a className="btn btn-outline text-[#FF3811]">Appointment</a>
 
         <div>

@@ -4,7 +4,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 const ContactBanner = () => {
   return (
   
-     <div className="flex items-center justify-around rounded-lg py-14 bg-black">
+     <div className="flex items-center justify-around rounded-lg py-14 bg-black my-20">
       <div className="flex items-center gap-4 text-white">
         <AiOutlineSchedule size={35} className="text-[#FF3811]"/>
       <div>

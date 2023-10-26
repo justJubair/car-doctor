@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import auth from "../../firebase/firebase.config";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Register = () => {
     const {createUser} = useAuth()
@@ -35,6 +36,7 @@ const Register = () => {
     }
   return (
     <div>
+      <Navbar/>
       <div className="hero min-h-screen ">
         <div className="hero-content gap-20 flex-col lg:flex-row">
           <div className="">
