@@ -110,7 +110,7 @@ const Navbar = () => {
         <ul className="menu  menu-horizontal w-full px-1 space-x-4">{navLinks}</ul>
       </div>
       <div className="space-x-6 flex items-center">
-        <AiOutlineShopping className="text-gray-500" size={25} />
+       <Link to="/myCart"> <AiOutlineShopping className="text-gray-500" size={25} /></Link>
         {
           user ? <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

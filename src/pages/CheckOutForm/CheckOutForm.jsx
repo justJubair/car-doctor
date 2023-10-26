@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import Navbar from "../../components/Navbar/Navbar";
 
 const CheckOutForm = () => {
   const service = useLoaderData();
@@ -40,6 +41,7 @@ const CheckOutForm = () => {
   };
   return (
     <div>
+      <Navbar/>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content w-11/12 mx-auto">
           <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
