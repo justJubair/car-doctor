@@ -7,7 +7,7 @@ const Services = () => {
   const { isPending, data } = useQuery({
     queryKey: ["servies"],
     queryFn: async () => {
-      const res = await fetch("services.json");
+      const res = await fetch("http://localhost:5000/services");
 
       return res.json();
     },

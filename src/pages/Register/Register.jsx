@@ -3,11 +3,12 @@ import loginImg from "../../assets/images/login/login.svg";
 import useAuth from "../../hooks/useAuth";
 import auth from "../../firebase/firebase.config";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
 const Register = () => {
     const {createUser} = useAuth()
+    const navigate = useNavigate()
     const handleRegister =e=>{
         e.preventDefault()
         const form = new FormData(e.currentTarget)
@@ -23,11 +24,13 @@ const Register = () => {
                 displayName: name, photoURL: photo
             })
             .then(()=>{
-
+              navigate("/")
+              form.reset()
             })
             .catch(error=>{
                 console.log(error)
             })
+            
         })
         .catch(error=>{
             toast.error(error.message)
