@@ -3,16 +3,17 @@ import useAuth from "../../hooks/useAuth";
 import MyCartRow from "../../components/MyCartRow/MyCartRow";
 import Navbar from "../../components/Navbar/Navbar";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const MyCart = () => {
-  const [order, setOrder] = useState([]);
+  const [orders, setOrders] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
     fetch(`http://localhost:5000/orders?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setOrder(data);
+        setOrders(data);
       });
   }, [user?.email]);
 
@@ -49,8 +50,8 @@ const MyCart = () => {
                   "success"
                 );
               }
-              const remaining = order.filter(order=> order._id !== _id)
-              setOrder(remaining)
+              const remaining = orders.filter(order=> order._id !== _id)
+              setOrders(remaining)
             });
         } else if (
           /* Read more about handling dismissals below */
@@ -75,7 +76,14 @@ const MyCart = () => {
       })
       .then(res=>res.json())
       .then(data=>{
-        console.log(data)
+        if(data.modifiedCount > 0){
+          toast.success("Service Confirmed")
+          const remaining = orders.filter(order=> order._id !== _id)
+          const updatedOrder = orders.find(order=> order._id === _id)
+          updatedOrder.status = "confirm"
+          const newOrders = [updatedOrder, ...remaining]
+          setOrders(newOrders)
+        }
       })
   }
 
@@ -95,7 +103,7 @@ const MyCart = () => {
             </tr>
           </thead>
           <tbody>
-            {order?.map((order) => (
+            {orders?.map((order) => (
               <MyCartRow
                 key={order._id}
                 order={order}

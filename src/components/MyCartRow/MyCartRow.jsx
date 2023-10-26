@@ -43,7 +43,10 @@ const MyCartRow = ({ order, handleDelete, handleConfirm }) => {
       </td>
       <td>{order.date}</td>
       <th>
-        <button onClick={()=> handleConfirm(order._id)} className="btn btn-ghost btn-xs">details</button>
+        {
+          order?.status ? <span className="text-[#FF3811]">Confirmed</span> : <button onClick={()=> handleConfirm(order._id)} className="btn btn-ghost btn-xs">Confirm</button>
+        }
+        
       </th>
     </tr>
   );
@@ -51,6 +54,7 @@ const MyCartRow = ({ order, handleDelete, handleConfirm }) => {
 MyCartRow.propTypes = {
   order: PropTypes.object,
   handleDelete: PropTypes.func,
+  handleConfirm: PropTypes.func,
 };
 
 export default MyCartRow;
