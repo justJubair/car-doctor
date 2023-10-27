@@ -46,13 +46,14 @@ const CheckOutForm = () => {
         <img src={checkoutImg} className="object-cover" alt="" />
       <div className="absolute rounded-lg w-full h-full bg-black/70 top-0 left-0"></div>
       <div className="flex justify-center">
-      <div className="absolute rotate-6 bottom-0 p-3 bg-[#FF3811]  text-white">
-          <h2 className="text-xl font-bold ">{service?.title}</h2>
+      <div className="absolute bottom-0 w-[250px] border-b-[50px] border-b-[#FF3811] border-l-[25px] border-l-transparent
+      border-r-[25px] border-r-transparent">
+      </div>
+          <h2 className="text-xl font-bold absolute bottom-0 text p-3 text-white">{service?.title}</h2>
       </div>
       </div>
-      </div>
-      <div className="hero p-10 bg-base-200 rounded-lg">
-        <div className="hero-content w-11/12 mx-auto">
+      <div className="w-full p-10 bg-base-200 rounded-lg">
+        <div className=" w-full  mx-auto">
           <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
             <form onSubmit={handleOrder} className="card-body">
               <div className="flex items-center gap-6 justify-between">

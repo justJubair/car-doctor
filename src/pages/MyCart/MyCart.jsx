@@ -4,18 +4,19 @@ import MyCartRow from "../../components/MyCartRow/MyCartRow";
 import Navbar from "../../components/Navbar/Navbar";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const MyCart = () => {
   const [orders, setOrders] = useState([]);
   const { user } = useAuth();
-
+  const url = `http://localhost:5000/orders?email=${user?.email}`
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setOrders(data);
-      });
-  }, [user?.email]);
+
+    axios.get(url, {withCredentials:true})
+    .then(res=>{
+      setOrders(res.data)
+    })
+  }, [url]);
 
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {

@@ -3,30 +3,31 @@ import loginImg from "../../assets/images/login/login.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../../components/Navbar/Navbar";
+import axios from "axios";
 const Login = () => {
-    const {loginUser} = useAuth()
-    const navigate = useNavigate()
-    const location = useLocation()
-   
+  const { loginUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-
     const email = form.get("email");
-
     const password = form.get("password");
     loginUser(email, password)
       .then(() => {
         toast.success("Logged in successfully");
-      
-          if(location.state.path){
-            navigate(location.state.path)
-          } else{
+        const user = { email };
 
-            navigate("/")
-          }
-            e.target.reset()
-        
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            if (res.data.success) {
+              navigate(location.state?.path ? location.state.path : "/")
+             
+              e.target.reset();
+            }
+          });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -34,7 +35,7 @@ const Login = () => {
   };
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="hero min-h-screen ">
         <div className="hero-content gap-20 flex-col lg:flex-row">
           <div className="">
@@ -67,13 +68,18 @@ const Login = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn bg-[#FF3811] text-white hover:text-black">
-               Login
+                <button
+                  type="submit"
+                  className="btn bg-[#FF3811] text-white hover:text-black"
+                >
+                  Login
                 </button>
               </div>
               <div className="flex items-center">
                 <p className="font-medium">Don&apos;t have an account?</p>
-                <Link to="/register" className="btn btn-link text-[#FF3811]">Register</Link>
+                <Link to="/register" className="btn btn-link text-[#FF3811]">
+                  Register
+                </Link>
               </div>
             </form>
           </div>

@@ -4,17 +4,17 @@ import parts from "../../assets/images/about_us/parts.jpg";
 
 const AboutUs = () => {
   return (
-    <div className="hero min-h-screen">
-      <div className="hero-content gap-20 flex-col lg:flex-row">
-        <div className="relative">
-          <img src={person} className="max-w-md rounded-lg shadow-2xl" />
+    <div className="hero ">
+      <div className="hero-content gap-10 lg:gap-20 flex-col-reverse lg:flex-row">
+        <div className="relative mb-28 lg:mb-0">
+          <img src={person} className="md:max-w-lg rounded-lg shadow-2xl" />
           <img
             src={parts}
-            className="border-8 border-white absolute top-1/2 -right-10 w-[250px] h-[200px]"
+            className="border-8 border-white absolute top-48 lg:top-1/2 -right-2 md:-right-10 w-[200px] md:w-[250px] lg:h-[200px]"
             alt=""
           />
         </div>
-        <div className="space-y-4 w-1/3">
+        <div className="space-y-4 w-full  lg:w-1/3">
           <h2 className="font-bold text-xl text-[#FF3811]">About Us</h2>
           <h1 className="text-4xl font-bold">
             We are qualified & of experience in this field
