@@ -1,11 +1,13 @@
 import toast from "react-hot-toast";
 import loginImg from "../../assets/images/login/login.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../../components/Navbar/Navbar";
 const Login = () => {
     const {loginUser} = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+   
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -14,12 +16,17 @@ const Login = () => {
 
     const password = form.get("password");
     loginUser(email, password)
-      .then((result) => {
+      .then(() => {
         toast.success("Logged in successfully");
-        if(result.user){
+      
+          if(location.state.path){
+            navigate(location.state.path)
+          } else{
+
             navigate("/")
+          }
             e.target.reset()
-        }
+        
       })
       .catch((error) => {
         toast.error(error.message);

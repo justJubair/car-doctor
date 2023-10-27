@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import Navbar from "../../components/Navbar/Navbar";
-
+import checkoutImg from "../../assets/images/checkout/checkout.png"
 const CheckOutForm = () => {
   const service = useLoaderData();
 
@@ -42,7 +42,16 @@ const CheckOutForm = () => {
   return (
     <div>
       <Navbar/>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="relative mt-8 mb-20 w-full md:w-[1100px] mx-auto">
+        <img src={checkoutImg} className="object-cover" alt="" />
+      <div className="absolute rounded-lg w-full h-full bg-black/70 top-0 left-0"></div>
+      <div className="flex justify-center">
+      <div className="absolute rotate-6 bottom-0 p-3 bg-[#FF3811]  text-white">
+          <h2 className="text-xl font-bold ">{service?.title}</h2>
+      </div>
+      </div>
+      </div>
+      <div className="hero p-10 bg-base-200 rounded-lg">
         <div className="hero-content w-11/12 mx-auto">
           <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
             <form onSubmit={handleOrder} className="card-body">
