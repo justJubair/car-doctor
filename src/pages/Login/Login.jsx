@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleRegister = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
@@ -42,7 +42,7 @@ const Login = () => {
             <img src={loginImg} alt="" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleRegister} className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <h1 className="my-8 text-center font-bold text-4xl">Login</h1>
 
               <div className="form-control">
