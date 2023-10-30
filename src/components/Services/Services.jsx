@@ -15,7 +15,7 @@ const Services = () => {
 
   if (isPending) {
     return (
-      <div>
+      <div className="text-center my-10">
         <span className="loading loading-bars loading-lg"></span>
       </div>
     );
