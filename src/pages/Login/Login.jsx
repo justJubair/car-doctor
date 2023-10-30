@@ -3,7 +3,6 @@ import loginImg from "../../assets/images/login/login.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../../components/Navbar/Navbar";
-import axios from "axios";
 const Login = () => {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
@@ -15,19 +14,14 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
     loginUser(email, password)
-      .then(() => {
-        toast.success("Logged in successfully");
-        const user = { email };
+      .then((result) => {
+        if(result.user){
+          toast.success("Logged in successfully");
+          navigate(location.state?.path ? location.state.path : "/")
+        }
+        
 
-        axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
-          .then((res) => {
-            if (res.data.success) {
-              navigate(location.state?.path ? location.state.path : "/")
-             
-              e.target.reset();
-            }
-          });
+        
       })
       .catch((error) => {
         toast.error(error.message);

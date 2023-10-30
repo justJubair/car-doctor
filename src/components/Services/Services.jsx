@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ServiceCard from "./ServiceCard";
 import { useState } from "react";
+import ServiceSkeleton from "./ServiceSkeleton";
 const Services = () => {
   const [isShowAll, setIsShowAll] = useState(false);
   const { isPending, data } = useQuery({
@@ -13,16 +14,9 @@ const Services = () => {
     },
   });
 
-  if (isPending) {
-    return (
-      <div className="text-center my-10">
-        <span className="loading loading-bars loading-lg"></span>
-      </div>
-    );
-  }
 
   return (
-    <div>
+    <div className="mt-16">
       <div className="w-1/2 mx-auto  text-center">
         <h3 className="font-bold text-[#FF3811]">Service</h3>
         <h2 className="font-bold text-3xl mb-4">Our Service Area</h2>
@@ -32,9 +26,13 @@ const Services = () => {
         </p>
       </div>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {data?.slice(0, isShowAll ? data.length : 3).map((service) => (
-          <ServiceCard key={service._id} service={service} />
-        ))}
+       {isPending && <ServiceSkeleton cards={3}/>}
+        { 
+       
+        data?.slice(0, isShowAll ? data.length : 3).map((service) => (
+          <ServiceCard key={service._id} service={service}  /> 
+        ))
+        }
       </div>
       <div className="text-center my-8">
         <button

@@ -2,13 +2,16 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom";
 const ServiceCard = ({service}) => {
+
+
+
   return (
     <div className="card bg-base-100 shadow-xl">
   <figure className="px-10 pt-10">
-    <img src={service.img} alt="Shoes" className="rounded-xl" />
+    <img src={ service.img } alt="Shoes" className="rounded-xl" />
   </figure>
   <div className="card-body ">
-  <h2 className="card-title">{service.title}</h2>
+  <h2 className="card-title">{service.title }</h2>
     
     <div className="flex w-full items-center">
       <p className='font-medium text-start text-[#FF3811]'>Price: ${service.price}</p>
@@ -20,6 +23,6 @@ const ServiceCard = ({service}) => {
 }
 
 ServiceCard.propTypes={
-  service:PropTypes.object
+  service:PropTypes.object,
 }
 export default ServiceCard
