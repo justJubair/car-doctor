@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -34,13 +35,33 @@ const AuthProvider = ({ children }) => {
   // setup a observer for user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email
+      const loggedUser = {email: userEmail}
+     
       setUser(currentUser);
       setLoading(false)
+      // send user email to create a jwt token
+    
+    //  if user exists,
+      if(currentUser){
+
+        axios.post("http://localhost:5000/jwt", loggedUser, {withCredentials:true})
+        .then(res=>{
+          console.log(res.data)
+        })
+      }
+      else {
+        axios.post("http://localhost:5000/logout", loggedUser,  {withCredentials:true})
+        .then(res=>{
+          console.log(res.data)
+         
+        })
+      }
       return () => {
         unsubscribe();
       };
     });
-  }, []);
+  }, [user?.email]);
   const authInfo = {
     user,
     createUser,
