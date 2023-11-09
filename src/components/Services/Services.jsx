@@ -7,15 +7,17 @@ import { axiosSecure } from "../../hooks/useAxios";
 const Services = () => {
   const [isShowAll, setIsShowAll] = useState(false);
   const [isLoading, setIsLoading] = useState(true)
+  const [search, setSearch] = useState(" ")
   const [data, setData] = useState([])
   const [asc, setAsc] = useState(true)
   useEffect(()=>{
-    axiosSecure.get(`/services?sort=${asc ? "asc" : "desc"}`)
+    axiosSecure.get(`/services?sort=${asc ? "asc" : "desc"}&search=${search}`)
     .then(res=>{
       setData(res.data)
       setIsLoading(false)
     })
-  },[asc])
+  },[asc, search])
+
   // const getServices = async()=>{
   //   // const res = await axiosSecure.get(`/services?sort=${asc ? "asc" : "desc"}`)
   //   // return res
@@ -40,6 +42,10 @@ const Services = () => {
   //   return <p>loading...</p>
   // }
 
+  const handleSearch =e=>{
+    e.preventDefault()
+    setSearch(e.target.search.value)
+  }
   const handleShowAll = ()=>{
     setIsShowAll(!isShowAll)
   
@@ -56,6 +62,10 @@ const Services = () => {
         </p>
       <button onClick={()=>setAsc(!asc)} className="btn text-white my-4 bg-[#FF3811]">
         {asc ? "Price: high to low" : "Price: Low to high"}</button>
+        <form onSubmit={handleSearch}>
+          <input className="input input-bordered mr-4" type="text" name="search" />
+          <input className="btn" type="submit" value="Search" />
+        </form>
       </div>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
        {isLoading && <ServiceSkeleton cards={3}/>}
