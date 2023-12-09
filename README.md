@@ -1,8 +1,7 @@
-# React + Vite
+# Car Doctor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live link is not available yet.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- This is a car reparing, maintainance and servicing related website.
+- The servicing offers are displayed in the Home page, users can sort the services via price and they also can search for a specific service if they like.
+- This project is developled with: React, TailwindCSS, Express, Node, MongoDB, Firebase. 
